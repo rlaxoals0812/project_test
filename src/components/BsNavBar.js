@@ -22,16 +22,10 @@ function BsNavBar() {
         setAlertShow(false);
     };
 
-    const handleLoginModal = useCallback(() => {
-        dispatch({
-            type: "LOGIN_MODAL",
-            payload: {
-                show: true,
-                message: "로그인 폼 입니다"
-            }
-        });
-        
-    }, [dispatch]);
+    // 로그인 모달을 열던 기존 기능 대신, 로그인 페이지로 이동하도록 수정
+    const handleLogin = useCallback(() => {
+        navigate('/login'); // 로그인 페이지로 이동
+    }, [navigate]);
 
     // 네비게이션 바 스타일 임시 설정
     const navbarStyle = {
@@ -75,8 +69,8 @@ function BsNavBar() {
                     <NavLink to="/about" style={linkStyle}>About</NavLink>
                     {/* 필요한 다른 링크들 추가 */}
                 </div>
-                                {/* 로그인/로그아웃 섹션입니다. */}
-                                <div style={authStyle}>
+                {/* 로그인/로그아웃 섹션입니다. */}
+                <div style={authStyle}>
                     {userName ? (
                         <>
                             {/* 로그인이 되었을 때 보여질 텍스트와 로그아웃 버튼 */}
@@ -97,7 +91,7 @@ function BsNavBar() {
                     ) : (
                         // 로그인되지 않았을 때 보여질 로그인 버튼
                         <button 
-                            onClick={handleLoginModal} 
+                            onClick={handleLogin} 
                             style={{ 
                                 backgroundColor: '#007bff', // 버튼의 배경 색상
                                 color: 'white', // 버튼 텍스트 색상

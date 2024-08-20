@@ -45,6 +45,7 @@ function LoginModal({ show, message, onClose }) {
         dispatch({ type: "LOGIN_MODAL", payload: { show: false } });
         //dispatch({ type: "UPDATE_USER", payload: { userName : '' }});
         dispatch({ type: "UPDATE_USER", payload: { userName: state.userName } });
+        
     };
 
     if (!show) return null;
