@@ -44,7 +44,7 @@ function LoginModal({ show, message, onClose }) {
         alert("로그인이 수락되었습니다.");
         dispatch({ type: "LOGIN_MODAL", payload: { show: false } });
         //dispatch({ type: "UPDATE_USER", payload: { userName : '' }});
-        dispatch({ type: "UPDATE_USER", payload: { userName : '' }});
+        dispatch({ type: "UPDATE_USER", payload: { userName: state.userName } });
     };
 
     if (!show) return null;
