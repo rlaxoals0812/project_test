@@ -10,13 +10,13 @@ function BsNavBar() {
 
     const [alertShow, setAlertShow] = useState(false);
 
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        dispatch({ type: "UPDATE_USER", payload: null });
-        navigate("/");
-        setAlertShow(true);
-        setTimeout(() => setAlertShow(false), 3000); 
-    };
+    // const handleLogout = () => {
+    //     localStorage.removeItem('token');
+    //     dispatch({ type: "UPDATE_USER", payload: null });
+    //     navigate("/");
+    //     setAlertShow(true);
+    //     setTimeout(() => setAlertShow(false), 3000); 
+    // };
 
     const handleYes = () => {
         setAlertShow(false);
@@ -70,18 +70,7 @@ function BsNavBar() {
                         <>
                             {/* 로그인된 사용자 이름을 표시합니다. */}
                             <span>{userName}</span>
-                            <button 
-                                onClick={handleLogout} 
-                                style={{ 
-                                    backgroundColor: '#007bff', 
-                                    color: 'white', 
-                                    border: 'none', 
-                                    padding: '5px 10px', 
-                                    borderRadius: '5px' 
-                                }}
-                            >
-                                Logout
-                            </button>
+                            <NavLink to="/logout" style={linkStyle}>Logout</NavLink>
                         </>
                     ) : (
                         // 로그인되지 않았을 때 보여질 로그인 버튼

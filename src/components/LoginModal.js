@@ -9,7 +9,7 @@ function LoginModal({ show, message, onClose }) {
     });
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const [error, setError] = useState('');
     // Re-enable the handleChange function to update the state when the user types
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -41,7 +41,12 @@ function LoginModal({ show, message, onClose }) {
     */
     //임시로 어떤 상황에서든 로그인 가능하게 만듦
     const handleLogin = () => {
-        // Perform login
+        if (!state.userName || !state.password) {
+            setError("아이디와 비밀번호를 모두 입력해주세요.");
+            return;  // 조건을 충족하지 않으면 로그인 절차를 중단
+        }
+    
+        // 로그인 성공 시 처리
         alert("로그인이 수락되었습니다.");
         dispatch({ type: "LOGIN_MODAL", payload: { show: false } });
         dispatch({ type: "UPDATE_USER", payload: { userName: state.userName } });
@@ -76,6 +81,7 @@ function LoginModal({ show, message, onClose }) {
                         placeholder="Password..." 
                         onChange={handleChange}  // Attach onChange handler
                     />
+                    {error && <div style={{ color: 'red' }}>{error}</div>} 
                 </div>
                 <div className="modal-footer">
                     <button onClick={handleLogin}>로그인</button>
