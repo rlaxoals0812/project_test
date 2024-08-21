@@ -71,21 +71,11 @@ function BsNavBar() {
                             {/* 로그인된 사용자 이름을 표시합니다. */}
                             <span>{userName}</span>
                             <NavLink to="/logout" style={linkStyle}>Logout</NavLink>
+                            
                         </>
                     ) : (
                         // 로그인되지 않았을 때 보여질 로그인 버튼
-                        <button 
-                            onClick={handleLogin} 
-                            style={{ 
-                                backgroundColor: '#007bff', 
-                                color: 'white', 
-                                border: 'none', 
-                                padding: '5px 10px', 
-                                borderRadius: '5px' 
-                            }}
-                        >
-                            Sign in
-                        </button>
+                        <NavLink to="/login" style={linkStyle}>Login</NavLink>
                     )}
                 </div>
             </nav>

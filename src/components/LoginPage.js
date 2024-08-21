@@ -5,7 +5,7 @@ function LoginPage() {
     return (
         <div>
             <h2>로그인</h2>
-            <LoginModal show={true} message="로그인 폼 입니다" onClose={() => {}} />
+            <LoginModal show={true} onClose={() => {}} />
         </div>
     );
 }
