@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
 function LoginModal({ show, message, onClose }) {
     const [state, setState] = useState({
-        userName: 'admin',
-        password: '1234'
+        userName: '',
+        password: ''
     });
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    // 기존 코드 주석 처리
-    /*
+    // Re-enable the handleChange function to update the state when the user types
     const handleChange = (e) => {
         const { name, value } = e.target;
         setState(prevState => ({
@@ -17,7 +18,9 @@ function LoginModal({ show, message, onClose }) {
             [name]: value
         }));
     };
-
+    // 기존 코드 주석 처리
+    /*
+   
     const handleLogin = () => {
         axios.post("/auth", state)
             .then(res => {
@@ -36,16 +39,13 @@ function LoginModal({ show, message, onClose }) {
             });
     };
     */
-
-    // 새롭게 만든 간단한 로그인 폼 핸들러
+    //임시로 어떤 상황에서든 로그인 가능하게 만듦
     const handleLogin = () => {
-        // 로그인 수락 처리
-
+        // Perform login
         alert("로그인이 수락되었습니다.");
         dispatch({ type: "LOGIN_MODAL", payload: { show: false } });
-        //dispatch({ type: "UPDATE_USER", payload: { userName : '' }});
         dispatch({ type: "UPDATE_USER", payload: { userName: state.userName } });
-        
+        navigate('/');  // 홈 페이지로 이동
     };
 
     if (!show) return null;
@@ -55,10 +55,9 @@ function LoginModal({ show, message, onClose }) {
             <div className="modal-content">
                 <div className="modal-header">
                     <h5>{message}</h5>
-                    <button className="close-button" onClick={onClose}>×</button>
+                    <button className="close-button" onClick={onClose}>×</button>   
                 </div>
                 <div className="modal-body">
-                    {/* 빈 로그인 폼 */}
                     <label htmlFor="userName">User Name</label>
                     <input 
                         type="text" 
@@ -66,7 +65,7 @@ function LoginModal({ show, message, onClose }) {
                         id="userName"
                         value={state.userName} 
                         placeholder="User Name..." 
-                        
+                        onChange={handleChange}  // Attach onChange handler
                     />
                     <label htmlFor="password">Password</label>
                     <input 
@@ -75,7 +74,7 @@ function LoginModal({ show, message, onClose }) {
                         id="password"
                         value={state.password} 
                         placeholder="Password..." 
-                        
+                        onChange={handleChange}  // Attach onChange handler
                     />
                 </div>
                 <div className="modal-footer">

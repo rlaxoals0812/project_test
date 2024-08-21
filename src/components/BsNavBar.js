@@ -4,7 +4,7 @@ import { useState, useCallback } from "react";
 import AlertModal from "./AlertModal";
 
 function BsNavBar() {
-    const userName = useSelector(state => state.userName, shallowEqual);
+    const userName = useSelector(state => state.userName?.userName, shallowEqual);//로그인된 아이디가 로그아웃 버튼 옆에 나오도록함
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -22,12 +22,10 @@ function BsNavBar() {
         setAlertShow(false);
     };
 
-    // 로그인 모달을 열던 기존 기능 대신, 로그인 페이지로 이동하도록 수정
     const handleLogin = useCallback(() => {
         navigate('/login'); // 로그인 페이지로 이동
     }, [navigate]);
 
-    // 네비게이션 바 스타일 임시 설정
     const navbarStyle = {
         display: 'flex',
         justifyContent: 'space-between',
@@ -56,33 +54,30 @@ function BsNavBar() {
         color: 'white',
         textDecoration: 'none',
     };
-
+    
     return (
         <>
             <AlertModal show={alertShow} message={"로그 아웃 되었습니다"} yes={handleYes} />
             <nav style={navbarStyle}>
                 <div style={brandStyle}>
-                    MyBrand
+                    <NavLink to="/" style={linkStyle}>Home</NavLink>
                 </div>
                 <div style={linksStyle}>
-                    <NavLink to="/" style={linkStyle}>Home</NavLink>
                     <NavLink to="/about" style={linkStyle}>About</NavLink>
-                    {/* 필요한 다른 링크들 추가 */}
                 </div>
-                {/* 로그인/로그아웃 섹션입니다. */}
                 <div style={authStyle}>
                     {userName ? (
                         <>
-                            {/* 로그인이 되었을 때 보여질 텍스트와 로그아웃 버튼 */}
-                            <span>Signed out</span>
+                            {/* 로그인된 사용자 이름을 표시합니다. */}
+                            <span>{userName}</span>
                             <button 
                                 onClick={handleLogout} 
                                 style={{ 
-                                    backgroundColor: '#007bff', // 버튼의 배경 색상
-                                    color: 'white', // 버튼 텍스트 색상
-                                    border: 'none', // 버튼 테두리 제거
-                                    padding: '5px 10px', // 버튼 내부 패딩
-                                    borderRadius: '5px' // 버튼 모서리를 둥글게
+                                    backgroundColor: '#007bff', 
+                                    color: 'white', 
+                                    border: 'none', 
+                                    padding: '5px 10px', 
+                                    borderRadius: '5px' 
                                 }}
                             >
                                 Logout
@@ -93,11 +88,11 @@ function BsNavBar() {
                         <button 
                             onClick={handleLogin} 
                             style={{ 
-                                backgroundColor: '#007bff', // 버튼의 배경 색상
-                                color: 'white', // 버튼 텍스트 색상
-                                border: 'none', // 버튼 테두리 제거
-                                padding: '5px 10px', // 버튼 내부 패딩
-                                borderRadius: '5px' // 버튼 모서리를 둥글게
+                                backgroundColor: '#007bff', 
+                                color: 'white', 
+                                border: 'none', 
+                                padding: '5px 10px', 
+                                borderRadius: '5px' 
                             }}
                         >
                             Sign in
